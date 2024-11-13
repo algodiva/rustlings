@@ -24,10 +24,26 @@ enum Command {
 }
 
 mod my_module {
+    //use std::{process::Output, simd::MaskElement};
+
     use super::Command;
 
     // TODO: Complete the function as described above.
     // pub fn transformer(input: ???) -> ??? { ??? }
+	pub fn transformer(input:Vec<(String, Command)>) -> Vec<String> {
+		let mut output = vec!();
+
+		for element in input {
+			let result: String = match element.1 {
+				Command::Uppercase => element.0.to_uppercase(),
+				Command::Trim => element.0.trim().to_string(),
+				Command::Append(size) => element.0 + (&"bar".repeat(size))
+
+			};
+			output.push(result);
+		}
+		output
+	}
 }
 
 fn main() {
@@ -39,6 +55,7 @@ mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
     // use ???;
     use super::Command;
+	use super::my_module::transformer;
 
     #[test]
     fn it_works() {
